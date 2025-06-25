@@ -25,4 +25,26 @@ export class Counter {
     console.log('-'.repeat(10));
     console.log(changes);
   }
+
+  ngOnInit(){
+    //after render
+    //una vez
+    // async, then, subs
+    console.log('ngOnInit');
+    console.log('-'.repeat(10));
+    console.log('duration => ', this.duration);
+    console.log('message => ', this.message);
+  }
+
+  ngAfterViewInit(){
+    //after render
+    //hijos ya fueron renderizados o pintados
+    console.log('ngAfterViewInit');
+    console.log('-'.repeat(10));
+  }
+
+  ngOnDestroy(){
+    console.log('ngDestroy');
+    console.log('-'.repeat(10));
+  }
 }
