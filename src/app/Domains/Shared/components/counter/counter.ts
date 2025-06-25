@@ -9,24 +9,28 @@ import { Component, Input, SimpleChange, SimpleChanges } from '@angular/core';
   styleUrl: './counter.css'
 })
 export class Counter {
-  @Input({required: true}) duration: number = 0
-  @Input({required: true}) message: string = ''
+  @Input({ required: true }) duration: number = 0
+  @Input({ required: true }) message: string = ''
 
-  constructor(){
+  constructor() {
     // NO ASYNC
     //before rending
     console.log('constructor');
     console.log('-'.repeat(10));
   }
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     //before and during render
     console.log('ngOnChange');
     console.log('-'.repeat(10));
     console.log(changes);
+    const duration = changes['duration']
+    if (duration && duration.currentValue !== duration.previousValue) {
+      this.doSomething()
+    }
   }
 
-  ngOnInit(){
+  ngOnInit() {
     //after render
     //una vez
     // async, then, subs
@@ -36,15 +40,19 @@ export class Counter {
     console.log('message => ', this.message);
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     //after render
     //hijos ya fueron renderizados o pintados
     console.log('ngAfterViewInit');
     console.log('-'.repeat(10));
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     console.log('ngDestroy');
     console.log('-'.repeat(10));
+  }
+
+  doSomething() {
+    console.log('change duration');
   }
 }
