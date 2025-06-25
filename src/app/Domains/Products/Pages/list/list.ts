@@ -10,5 +10,8 @@ import { Product } from '../../Components/product/product';
   styleUrl: './list.css'
 })
 export class List {
-
+  fromChild(event: string) {
+    console.log('estamos en al padre');
+    console.log(event);
+  }
 }
