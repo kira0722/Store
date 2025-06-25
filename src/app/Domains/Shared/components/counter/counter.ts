@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, signal, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -11,6 +11,8 @@ import { Component, Input, SimpleChange, SimpleChanges } from '@angular/core';
 export class Counter {
   @Input({ required: true }) duration: number = 0
   @Input({ required: true }) message: string = ''
+  counter = signal(0)
+  counterRef: number | undefined
 
   constructor() {
     // NO ASYNC
@@ -38,6 +40,10 @@ export class Counter {
     console.log('-'.repeat(10));
     console.log('duration => ', this.duration);
     console.log('message => ', this.message);
+    this.counterRef = window.setInterval(() => {
+      console.log('run intervalo');
+      this.counter.update(statePrev => statePrev + 1)
+    }, 1000)
   }
 
   ngAfterViewInit() {
@@ -50,6 +56,7 @@ export class Counter {
   ngOnDestroy() {
     console.log('ngDestroy');
     console.log('-'.repeat(10));
+    window.clearInterval(this.counterRef)
   }
 
   doSomething() {
