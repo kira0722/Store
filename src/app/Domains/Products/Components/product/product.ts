@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+import { IProduct } from '../../../Shared/models/IProdcut.model';
+
 @Component({
   selector: 'app-product',
   standalone: true,
@@ -9,14 +11,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './product.css'
 })
 export class Product {
-  @Input({required: true}) img: string = '';
-  @Input({required: true}) price: number = 0;
-  @Input({required: true}) title: string = '';
+  @Input({required: true}) product!: IProduct;
 
   @Output() addToCart = new EventEmitter();
 
   addToCartHandler() {
     console.log('click form child');
-    this.addToCart.emit('hola este es un msg desde el hijo ' + this.title);
+    this.addToCart.emit('hola este es un msg desde el hijo ' + this.product.title);
   }
 }
